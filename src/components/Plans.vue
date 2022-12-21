@@ -2,32 +2,34 @@
 </script>
 
 <template>
-    <h1>Select your plan</h1>
-    <h4>You have the option of monthly or yearly billing.</h4>
-    <form action="#">
-        <div>
+    <section>
+        <h1>Select your plan</h1>
+        <h4>You have the option of monthly or yearly billing.</h4>
+        <form action="#">
+            <div>
+                <label>
+                    Arcade
+                    <input type="radio" name="card">
+                </label>
+                <label>
+                    Advanced
+                    <input type="radio" name="card">
+                </label>
+                <label>
+                    Pro
+                    <input type="radio" name="card">
+                </label>
+            </div>
             <label>
-                Arcade
-                <input type="radio" name="card">
+                <input type="checkbox">
+                <span></span>
             </label>
-            <label>
-                Advanced
-                <input type="radio" name="card">
-            </label>
-            <label>
-                Pro
-                <input type="radio" name="card">
-            </label>
-        </div>
-        <label>
-            <input type="checkbox">
-            <span></span>
-        </label>
-        <div>
-            <button>go back</button>
-            <button>next step</button>
-        </div>
-    </form>
+            <div>
+                <button>go back</button>
+                <button>next step</button>
+            </div>
+        </form>
+    </section>
 </template>
 
 <style scoped>
