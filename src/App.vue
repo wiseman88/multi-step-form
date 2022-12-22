@@ -4,12 +4,28 @@ import Plans from './components/Plans.vue';
 import Addons from './components/Addons.vue';
 import Summary from './components/Summary.vue';
 import Confirmation from './components/Confirmation.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const components = [Personal, Plans, Addons, Summary, Confirmation]
 
 let currentStep = ref(0)
 let steps = components.length
+
+const allowGoBack = computed<boolean>(() => {
+  return currentStep.value !== 0
+})
+
+const showActionButtons = computed<boolean>(() => {
+  return currentStep.value <= (steps - 2)
+})
+
+const allowNextStep = computed<boolean>(() => {
+  return currentStep.value !== (steps - 2)
+})
+
+const allowConfirm = computed<boolean>(() => {
+  return (currentStep.value + 1) === (steps - 1)
+})
 
 const nextStep = () => {
   currentStep.value++
@@ -25,10 +41,10 @@ const prevStep = () => {
   <main>
     <component v-for="(component, index) in components" :is="component" :key="index" :id="index"
       :currentStep="currentStep"></component>
-    <div v-if="currentStep <= (steps - 2)">
-      <button v-if="currentStep !== 0" @click="prevStep">go back</button>
-      <button v-if="currentStep !== (steps - 2)" @click="nextStep">next step</button>
-      <button v-if="(currentStep + 1) === (steps - 1)" @click="nextStep">confirm</button>
+    <div v-if="showActionButtons">
+      <button v-if="allowGoBack" @click="prevStep">go back</button>
+      <button v-if="allowNextStep" @click="nextStep">next step</button>
+      <button v-if="allowConfirm" @click="nextStep">confirm</button>
     </div>
   </main>
 </template>
