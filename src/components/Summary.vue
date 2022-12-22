@@ -1,8 +1,14 @@
 <script setup lang="ts">
+
+const props = defineProps<{
+    currentStep: number,
+    id: number
+}>()
+
 </script>
 
 <template>
-    <section>
+    <section v-if="currentStep === id">
         <h1>Finishing up</h1>
         <h4>Double-check everything looks OK before confirming.</h4>
         <div>
@@ -27,10 +33,6 @@
         <div>
             <p>Total (per month)</p>
             <p>+$12/mo</p>
-        </div>
-        <div>
-            <button>go back</button>
-            <button>confirm</button>
         </div>
     </section>
 </template>

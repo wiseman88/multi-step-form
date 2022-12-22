@@ -1,8 +1,12 @@
 <script setup lang="ts">
+const props = defineProps<{
+    currentStep: number,
+    id: number
+}>()
 </script>
 
 <template>
-    <section>
+    <section v-if="currentStep === id">
         <h1>Select your plan</h1>
         <h4>You have the option of monthly or yearly billing.</h4>
         <form action="#">
@@ -24,10 +28,6 @@
                 <input type="checkbox">
                 <span></span>
             </label>
-            <div>
-                <button>go back</button>
-                <button>next step</button>
-            </div>
         </form>
     </section>
 </template>

@@ -1,8 +1,14 @@
 <script setup lang="ts">
+
+const props = defineProps<{
+    currentStep: number,
+    id: number
+}>()
+
 </script>
 
 <template>
-    <section>
+    <section v-if="currentStep === id">
         <h1>Pick add-ons</h1>
         <h4>Add-ons help enhance your gaming experience.</h4>
         <form action="#">
@@ -31,10 +37,6 @@
                     </span>
                     <input type="checkbox">
                 </label>
-            </div>
-            <div>
-                <button>go back</button>
-                <button>next step</button>
             </div>
         </form>
     </section>
