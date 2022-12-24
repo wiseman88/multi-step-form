@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Sidebar from './components/Sidebar.vue';
 import Personal from './components/Personal.vue';
 import Plans from './components/Plans.vue';
 import Addons from './components/Addons.vue';
@@ -42,12 +43,15 @@ const prevStep = () => {
 
 <template>
   <main>
-    <component v-for="(component, index) in components" :is="component" :key="index" :id="index"
-      :currentStep="currentStep"></component>
-    <div v-if="showActionButtons">
-      <Button v-if="allowGoBack" @click="prevStep" :classes="['btn-default']" :text="'go back'" />
-      <Button v-if="allowNextStep" @click="nextStep" :classes="['btn-primary']" :text="'next page'" />
-      <Button v-if="allowConfirm" @click="nextStep" :classes="['btn-secondary']" :text="'confirm'" />
+    <div>
+      <Sidebar v-if="showActionButtons" :currentStep="currentStep" />
+      <component v-for="(component, index) in components" :is="component" :key="index" :id="index"
+        :currentStep="currentStep"></component>
+      <div v-if="showActionButtons">
+        <Button v-if="allowGoBack" @click="prevStep" :classes="['btn-default']" :text="'go back'" />
+        <Button v-if="allowNextStep" @click="nextStep" :classes="['btn-primary']" :text="'next page'" />
+        <Button v-if="allowConfirm" @click="nextStep" :classes="['btn-secondary']" :text="'confirm'" />
+      </div>
     </div>
   </main>
 </template>
