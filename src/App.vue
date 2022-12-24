@@ -53,5 +53,8 @@ const prevStep = () => {
 </template>
 
 <style scoped>
-
+main {
+  height: 100vh;
+  background-color: var(--color-bg-main);
+}
 </style>
