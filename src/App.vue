@@ -5,11 +5,14 @@ import Addons from './components/Addons.vue';
 import Summary from './components/Summary.vue';
 import Confirmation from './components/Confirmation.vue';
 import { computed, ref } from 'vue';
+import Button from './components/Button.vue';
 
 const components = [Personal, Plans, Addons, Summary, Confirmation]
 
 let currentStep = ref(0)
 let steps = components.length
+const classes: Array<string> = []
+
 
 const allowGoBack = computed<boolean>(() => {
   return currentStep.value !== 0
@@ -42,9 +45,9 @@ const prevStep = () => {
     <component v-for="(component, index) in components" :is="component" :key="index" :id="index"
       :currentStep="currentStep"></component>
     <div v-if="showActionButtons">
-      <button v-if="allowGoBack" @click="prevStep">go back</button>
-      <button v-if="allowNextStep" @click="nextStep">next step</button>
-      <button v-if="allowConfirm" @click="nextStep">confirm</button>
+      <Button v-if="allowGoBack" @click="prevStep" :classes="['btn-default']" :text="'go back'" />
+      <Button v-if="allowNextStep" @click="nextStep" :classes="['btn-primary']" :text="'next page'" />
+      <Button v-if="allowConfirm" @click="nextStep" :classes="['btn-secondary']" :text="'confirm'" />
     </div>
   </main>
 </template>

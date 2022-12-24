@@ -1,7 +1,9 @@
 :root {
     /* Primary colors */
     --color-primary: hsl(213, 96%, 18%);
+    --color-primary-hover: hsl(214, 72%, 32%);
     --color-secondary: hsl(243, 100%, 62%);
+    --color-secondary-hover: hsl(244, 98%, 77%);
     --color-secondary-light: hsl(228, 100%, 84%);
     --color-secondary-lighter: hsl(206, 94%, 87%);
     --color-error: hsl(354, 84%, 57%);
