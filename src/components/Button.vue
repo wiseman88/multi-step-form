@@ -24,6 +24,7 @@ const props = defineProps<{
 }
 
 .btn-default {
+    width: auto;
     background-color: none;
     color: var(--color-cool-gray);
 }
