@@ -12,15 +12,15 @@ const props = defineProps<{
         <form action="#">
             <div>
                 <label>
-                    Arcade
+                    <span>Arcade</span>
                     <input type="radio" name="card">
                 </label>
                 <label>
-                    Advanced
+                    <span>Advanced</span>
                     <input type="radio" name="card">
                 </label>
                 <label>
-                    Pro
+                    <span>Pro</span>
                     <input type="radio" name="card">
                 </label>
             </div>

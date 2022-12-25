@@ -13,15 +13,15 @@ const props = defineProps<{
         <h4>Please provide your name, email address, and phone number.</h4>
         <form action="#">
             <label>
-                Name
+                <span>Name</span>
                 <input type="text" placeholder="e.g. Stephen King">
             </label>
             <label>
-                Email address
+                <span>Email address</span>
                 <input type="text" placeholder="e.g. stephenking@lorem.com">
             </label>
             <label>
-                Phone number
+                <span>Phone number</span>
                 <input type="text" placeholder="e.g. +1 234 567 890">
             </label>
         </form>
