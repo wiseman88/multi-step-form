@@ -23,7 +23,8 @@ const steps = [
 ]
 
 const applyActiveClass = (stepId: number) => {
-    return stepId === (props.currentStep + 1) ? 'active' : ''
+    return stepId === (props.currentStep + 1) ? 'active'
+        : stepId === (props.currentStep) && props.currentStep === steps.length ? 'active' : ''
 }
 </script>
 
