@@ -12,7 +12,6 @@ const components = [Personal, Plans, Addons, Summary, Confirmation]
 
 let currentStep = ref(0)
 let steps = components.length
-const classes: Array<string> = []
 
 
 const allowGoBack = computed<boolean>(() => {
