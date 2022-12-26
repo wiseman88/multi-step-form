@@ -95,15 +95,4 @@ main {
 .component label input::placeholder {
   color: var(--color-cool-gray);
 }
-
-.action-buttons {
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
-  background-color: var(--color-white);
-}
-
-.action-buttons .btn-next {
-  margin-left: auto;
-}
 </style>

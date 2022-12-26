@@ -47,5 +47,14 @@ const prevStep = () => {
 </template>
 
 <style scoped>
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: var(--color-white);
+}
 
+.action-buttons .btn-next {
+    margin-left: auto;
+}
 </style>
