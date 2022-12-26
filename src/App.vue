@@ -5,12 +5,15 @@ import Plans from './components/Plans.vue';
 import Addons from './components/Addons.vue';
 import Summary from './components/Summary.vue';
 import Confirmation from './components/Confirmation.vue';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import Button from './components/Button.vue';
+import { useStepStore } from './stores/step';
+import { storeToRefs } from 'pinia';
 
 const components = [Personal, Plans, Addons, Summary, Confirmation]
 
-let currentStep = ref(0)
+const step = useStepStore()
+let { currentStep } = storeToRefs(step)
 let steps = components.length
 
 
