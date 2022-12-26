@@ -5,41 +5,15 @@ import Plans from './components/Plans.vue';
 import Addons from './components/Addons.vue';
 import Summary from './components/Summary.vue';
 import Confirmation from './components/Confirmation.vue';
-import { computed } from 'vue';
-import Button from './components/Button.vue';
 import { useStepStore } from './stores/step';
 import { storeToRefs } from 'pinia';
+import Footer from './components/Footer.vue';
 
 const components = [Personal, Plans, Addons, Summary, Confirmation]
 
 const step = useStepStore()
 let { currentStep } = storeToRefs(step)
 let steps = components.length
-
-
-const allowGoBack = computed<boolean>(() => {
-  return currentStep.value !== 0
-})
-
-const showActionButtons = computed<boolean>(() => {
-  return currentStep.value <= (steps - 2)
-})
-
-const allowNextStep = computed<boolean>(() => {
-  return currentStep.value !== (steps - 2)
-})
-
-const allowConfirm = computed<boolean>(() => {
-  return (currentStep.value + 1) === (steps - 1)
-})
-
-const nextStep = () => {
-  currentStep.value++
-}
-
-const prevStep = () => {
-  currentStep.value--
-}
 
 </script>
 
@@ -52,12 +26,7 @@ const prevStep = () => {
           :currentStep="currentStep" class="component"></component>
       </div>
     </div>
-    <div v-if="showActionButtons" class="action-buttons">
-      <Button v-if="allowGoBack" @click="prevStep" class="btn-back" :classes="['btn-default']" :text="'go back'" />
-      <Button v-if="allowNextStep" @click="nextStep" class="btn-next" :classes="['btn-primary']" :text="'next page'" />
-      <Button v-if="allowConfirm" @click="nextStep" class="btn-confirm" :classes="['btn-secondary']"
-        :text="'confirm'" />
-    </div>
+    <Footer :steps="steps" />
   </main>
 </template>
 
