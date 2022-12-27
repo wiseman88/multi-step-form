@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useValidationStore } from '@/stores/validation';
-import { reactive, watch } from 'vue';
+import { ref, reactive, watch } from 'vue';
+import Error from './Error.vue';
 
 
 const props = defineProps<{
@@ -10,16 +11,52 @@ const props = defineProps<{
 
 const store = useValidationStore();
 
-const inputs = reactive({
+const name = ref('')
+const email = ref('')
+const phone = ref('')
+const errors = reactive({
     name: '',
     email: '',
     phone: ''
 })
 
-watch(inputs, (newValue) => {
-    store.name = newValue.name
-    store.email = newValue.email
-    store.phone = newValue.phone
+const validateName = (input: string) => {
+    if (input.length < 3) {
+        errors.name = 'This field is required'
+    } else {
+        errors.name = ''
+    }
+}
+
+const validateEmail = (input: string) => {
+    if (input.length < 3) {
+        errors.email = 'This field is required'
+    } else {
+        errors.email = ''
+    }
+}
+
+const validatePhone = (input: string) => {
+    if (input.length < 3) {
+        errors.phone = 'This field is required'
+    } else {
+        errors.phone = ''
+    }
+}
+
+watch(name, (newName) => {
+    validateName(newName)
+    store.name = newName
+});
+
+watch(email, (newEmail) => {
+    validateEmail(newEmail)
+    store.email = newEmail
+});
+
+watch(phone, (newPhone) => {
+    validatePhone(newPhone)
+    store.phone = newPhone
 });
 
 </script>
@@ -31,15 +68,18 @@ watch(inputs, (newValue) => {
         <form action="#">
             <label>
                 <span>Name</span>
-                <input type="text" placeholder="e.g. Stephen King" v-model="inputs.name">
+                <Error :error="errors.name" />
+                <input type="text" placeholder="e.g. Stephen King" v-model="name">
             </label>
             <label>
                 <span>Email address</span>
-                <input type="text" placeholder="e.g. stephenking@lorem.com" v-model="inputs.email">
+                <Error :error="errors.email" />
+                <input type="text" placeholder="e.g. stephenking@lorem.com" v-model="email">
             </label>
             <label>
                 <span>Phone number</span>
-                <input type="text" placeholder="e.g. +1 234 567 890" v-model="inputs.phone">
+                <Error :error="errors.phone" />
+                <input type="text" placeholder="e.g. +1 234 567 890" v-model="phone">
             </label>
         </form>
     </section>

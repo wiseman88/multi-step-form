@@ -69,6 +69,10 @@ main {
   color: var(--color-cool-gray);
 }
 
+.component label {
+  position: relative;
+}
+
 .component label:not(:last-of-type) {
   display: block;
   margin-bottom: 1rem;
@@ -82,6 +86,8 @@ main {
 }
 
 .component label input {
+  box-sizing: border-box;
+  width: 100%;
   padding: 0.5em 1em;
   border-radius: 0.25rem;
   border: 1px solid var(--color-light-gray);
