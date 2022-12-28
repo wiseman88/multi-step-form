@@ -14,6 +14,8 @@ const store = useValidationStore();
 const name = ref('')
 const email = ref('')
 const phone = ref('')
+const isEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+const isPhone = /^[\d\+]+$/;
 const errors = reactive({
     name: '',
     email: '',
@@ -29,7 +31,7 @@ const validateName = (input: string) => {
 }
 
 const validateEmail = (input: string) => {
-    if (input.length < 3) {
+    if (!isEmail.test(input)) {
         errors.email = 'This field is required'
     } else {
         errors.email = ''
@@ -37,7 +39,7 @@ const validateEmail = (input: string) => {
 }
 
 const validatePhone = (input: string) => {
-    if (input.length < 3) {
+    if (!isPhone.test(input)) {
         errors.phone = 'This field is required'
     } else {
         errors.phone = ''
