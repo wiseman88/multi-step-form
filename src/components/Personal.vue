@@ -15,7 +15,7 @@ const name = ref('')
 const email = ref('')
 const phone = ref('')
 const isEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-const isPhone = /^[\d\+]+$/;
+const isPhone = /^[\d\+]{10,20}$/;
 const errors = reactive({
     name: '',
     email: '',
