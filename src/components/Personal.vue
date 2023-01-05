@@ -39,7 +39,9 @@ const validateEmail = (input: string) => {
 }
 
 const validatePhone = (input: string) => {
-    if (!isPhone.test(input)) {
+    let inputCheck = input.replace(/\s/g, "");
+
+    if (!isPhone.test(inputCheck)) {
         errors.phone = 'This field is required'
     } else {
         errors.phone = ''
