@@ -23,6 +23,7 @@ const errors = reactive({
 })
 
 const validateName = (input: string) => {
+    store.name = name.value
     if (input.length < 3) {
         errors.name = 'This field is required'
     } else {
@@ -31,6 +32,7 @@ const validateName = (input: string) => {
 }
 
 const validateEmail = (input: string) => {
+    store.email = email.value
     if (!isEmail.test(input)) {
         errors.email = 'This field is required'
     } else {
@@ -39,6 +41,8 @@ const validateEmail = (input: string) => {
 }
 
 const validatePhone = (input: string) => {
+    store.phone = phone.value
+
     let inputCheck = input.replace(/\s/g, "");
 
     if (!isPhone.test(inputCheck)) {

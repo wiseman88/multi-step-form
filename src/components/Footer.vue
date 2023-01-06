@@ -34,7 +34,7 @@ const allowConfirm = computed<boolean>(() => {
 })
 
 const nextStep = () => {
-    if (name.value.length < 3 || !isEmail.test(email.value) || !isPhone.test(phone.value)) {
+    if (name.value.length < 3 || !isEmail.test(email.value) || !isPhone.test(phone.value.replace(/\s/g, ""))) {
         return
     }
 
