@@ -48,21 +48,6 @@ const validatePhone = (input: string) => {
     }
 }
 
-watch(name, (newName) => {
-    validateName(newName)
-    store.name = newName
-});
-
-watch(email, (newEmail) => {
-    validateEmail(newEmail)
-    store.email = newEmail
-});
-
-watch(phone, (newPhone) => {
-    validatePhone(newPhone)
-    store.phone = newPhone
-});
-
 </script>
 
 <template>
@@ -73,17 +58,18 @@ watch(phone, (newPhone) => {
             <label>
                 <span>Name</span>
                 <Error :error="errors.name" />
-                <input type="text" placeholder="e.g. Stephen King" v-model="name">
+                <input type="text" placeholder="e.g. Stephen King" v-model="name" @input="validateName(name)">
             </label>
             <label>
                 <span>Email address</span>
                 <Error :error="errors.email" />
-                <input type="text" placeholder="e.g. stephenking@lorem.com" v-model="email">
+                <input type="text" placeholder="e.g. stephenking@lorem.com" v-model="email"
+                    @input="validateEmail(email)">
             </label>
             <label>
                 <span>Phone number</span>
                 <Error :error="errors.phone" />
-                <input type="text" placeholder="e.g. +1 234 567 890" v-model="phone">
+                <input type="text" placeholder="e.g. +1 234 567 890" v-model="phone" @input="validatePhone(phone)">
             </label>
         </form>
     </section>
