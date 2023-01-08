@@ -11,9 +11,6 @@ import { storeToRefs } from 'pinia';
 const props = defineProps<{
     currentStep: number,
     id: number,
-    // allowGoBack: boolean,
-    // allowNextStep: boolean,
-    // allowConfirm: boolean,
     steps: number
 }>()
 
@@ -76,9 +73,9 @@ const allowConfirm = computed<boolean>(() => {
 })
 
 const nextStep = () => {
-    // validateName(name.value)
-    // validateEmail(email.value)
-    // validatePhone(phone.value)
+    validateName(name.value)
+    validateEmail(email.value)
+    validatePhone(phone.value)
 
     if (name.value.length < 3 || !isEmail.test(email.value) || !isPhone.test(phone.value.replace(/\s/g, ""))) {
         return
