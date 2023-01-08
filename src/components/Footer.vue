@@ -54,6 +54,11 @@ const prevStep = () => {
 
 <style scoped>
 .action-buttons {
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 1em;
