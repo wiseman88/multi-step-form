@@ -23,10 +23,10 @@ let steps = components.length
     <div class="form-wrapper">
       <div class="component-wrapper">
         <component v-for="(component, index) in components" :is="component" :key="index" :id="index"
-          :currentStep="currentStep" class="component"></component>
+          :currentStep="currentStep" class="component" :steps="steps"></component>
       </div>
     </div>
-    <Footer :steps="steps" />
+    <!-- <Footer :steps="steps" /> -->
   </main>
 </template>
 

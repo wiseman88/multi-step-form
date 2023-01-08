@@ -48,11 +48,7 @@ const prevStep = () => {
 
 <template>
     <footer v-if="showActionButtons" class="action-buttons">
-        <Button v-if="allowGoBack" @click="prevStep" class="btn-back" :classes="['btn-default']" :text="'go back'" />
-        <Button v-if="allowNextStep" @click="nextStep" class="btn-next" :classes="['btn-primary']"
-            :text="'next page'" />
-        <Button v-if="allowConfirm" @click="nextStep" class="btn-confirm" :classes="['btn-secondary']"
-            :text="'confirm'" />
+        <slot></slot>
     </footer>
 </template>
 
@@ -62,9 +58,5 @@ const prevStep = () => {
     justify-content: space-between;
     padding: 1em;
     background-color: var(--color-white);
-}
-
-.action-buttons .btn-next {
-    margin-left: auto;
 }
 </style>

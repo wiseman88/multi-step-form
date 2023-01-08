@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { useValidationStore } from '@/stores/validation';
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import Error from './Error.vue';
+import Button from './Button.vue';
+import Footer from './Footer.vue';
+import { useStepStore } from '@/stores/step';
+import { storeToRefs } from 'pinia';
 
 
 const props = defineProps<{
     currentStep: number,
-    id: number
+    id: number,
+    // allowGoBack: boolean,
+    // allowNextStep: boolean,
+    // allowConfirm: boolean,
+    steps: number
 }>()
 
 const store = useValidationStore();
@@ -52,6 +60,37 @@ const validatePhone = (input: string) => {
     }
 }
 
+const step = useStepStore();
+let { currentStep } = storeToRefs(step);
+
+const allowGoBack = computed<boolean>(() => {
+    return currentStep.value !== 0
+})
+
+const allowNextStep = computed<boolean>(() => {
+    return currentStep.value !== (props.steps - 2)
+})
+
+const allowConfirm = computed<boolean>(() => {
+    return (currentStep.value + 1) === (props.steps - 1)
+})
+
+const nextStep = () => {
+    // validateName(name.value)
+    // validateEmail(email.value)
+    // validatePhone(phone.value)
+
+    if (name.value.length < 3 || !isEmail.test(email.value) || !isPhone.test(phone.value.replace(/\s/g, ""))) {
+        return
+    }
+
+    currentStep.value++
+}
+
+const prevStep = () => {
+    currentStep.value--
+}
+
 </script>
 
 <template>
@@ -76,9 +115,19 @@ const validatePhone = (input: string) => {
                 <input type="text" placeholder="e.g. +1 234 567 890" v-model="phone" @input="validatePhone(phone)">
             </label>
         </form>
+        <Footer :steps="steps">
+            <Button v-if="allowGoBack" @click="prevStep" class="btn-back" :classes="['btn-default']"
+                :text="'go back'" />
+            <Button v-if="allowNextStep" @click="nextStep" class="btn-next" :classes="['btn-primary']"
+                :text="'next page'" />
+            <Button v-if="allowConfirm" @click="nextStep" class="btn-confirm" :classes="['btn-secondary']"
+                :text="'confirm'" />
+        </Footer>
     </section>
 </template>
 
 <style scoped>
-
+.action-buttons .btn-next {
+    margin-left: auto;
+}
 </style>
