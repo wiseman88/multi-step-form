@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue';
+import { reactive, computed } from 'vue';
 import Error from './Error.vue';
 import Button from './Button.vue';
 import Footer from './Footer.vue';
 import { useStepStore } from '@/stores/step';
 import { storeToRefs } from 'pinia';
+import { errors, isEmail, isPhone, validateName, validateEmail, validatePhone } from '@/composables/validations';
 
 
 const props = defineProps<{
@@ -18,40 +19,6 @@ const inputs = reactive({
     email: '',
     phone: ''
 })
-const isEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-const isPhone = /^[\d\+]{10,20}$/;
-const errors = reactive({
-    name: '',
-    email: '',
-    phone: ''
-})
-
-const validateName = (input: string) => {
-    if (input.length < 3) {
-        errors.name = 'This field is required'
-    } else {
-        errors.name = ''
-    }
-}
-
-const validateEmail = (input: string) => {
-    if (!isEmail.test(input)) {
-        errors.email = 'This field is required'
-    } else {
-        errors.email = ''
-    }
-}
-
-const validatePhone = (input: string) => {
-
-    let inputCheck = input.replace(/\s/g, "");
-
-    if (!isPhone.test(inputCheck)) {
-        errors.phone = 'This field is required'
-    } else {
-        errors.phone = ''
-    }
-}
 
 const step = useStepStore();
 let { currentStep } = storeToRefs(step);
