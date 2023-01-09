@@ -13,9 +13,11 @@ const props = defineProps<{
     steps: number
 }>()
 
-const name = ref('')
-const email = ref('')
-const phone = ref('')
+const inputs = reactive({
+    name: '',
+    email: '',
+    phone: ''
+})
 const isEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 const isPhone = /^[\d\+]{10,20}$/;
 const errors = reactive({
@@ -67,11 +69,11 @@ const allowConfirm = computed<boolean>(() => {
 })
 
 const nextStep = () => {
-    validateName(name.value)
-    validateEmail(email.value)
-    validatePhone(phone.value)
+    validateName(inputs.name)
+    validateEmail(inputs.email)
+    validatePhone(inputs.phone)
 
-    if (name.value.length < 3 || !isEmail.test(email.value) || !isPhone.test(phone.value.replace(/\s/g, ""))) {
+    if (inputs.name.length < 3 || !isEmail.test(inputs.email) || !isPhone.test(inputs.phone.replace(/\s/g, ""))) {
         return
     }
 
