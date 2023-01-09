@@ -1,53 +1,22 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
+import { computed } from 'vue';
 import Error from './Error.vue';
 import Button from './Button.vue';
 import Footer from './Footer.vue';
 import { useStepStore } from '@/stores/step';
 import { storeToRefs } from 'pinia';
-import { errors, isEmail, isPhone, validateName, validateEmail, validatePhone } from '@/composables/validations';
+import { errors, validateName, validateEmail, validatePhone } from '@/composables/validations';
+import { personalInputs } from '@/composables/inputs';
+import { nextStep, prevStep, allowGoBack, allowConfirm, allowNextStep } from '@/composables/steps';
+
 
 
 const props = defineProps<{
     id: number,
 }>()
 
-const inputs = reactive({
-    name: '',
-    email: '',
-    phone: ''
-})
-
 const step = useStepStore();
 let { currentStep, steps } = storeToRefs(step);
-
-const allowGoBack = computed<boolean>(() => {
-    return currentStep.value !== 0
-})
-
-const allowNextStep = computed<boolean>(() => {
-    return currentStep.value !== (steps.value - 2)
-})
-
-const allowConfirm = computed<boolean>(() => {
-    return (currentStep.value + 1) === (steps.value - 1)
-})
-
-const nextStep = () => {
-    validateName(inputs.name)
-    validateEmail(inputs.email)
-    validatePhone(inputs.phone)
-
-    if (inputs.name.length < 3 || !isEmail.test(inputs.email) || !isPhone.test(inputs.phone.replace(/\s/g, ""))) {
-        return
-    }
-
-    currentStep.value++
-}
-
-const prevStep = () => {
-    currentStep.value--
-}
 
 </script>
 
@@ -59,20 +28,20 @@ const prevStep = () => {
             <label>
                 <span>Name</span>
                 <Error :error="errors.name" />
-                <input type="text" placeholder="e.g. Stephen King" v-model="inputs.name"
-                    @input="validateName(inputs.name)">
+                <input type="text" placeholder="e.g. Stephen King" v-model="personalInputs.name"
+                    @input="validateName(personalInputs.name)">
             </label>
             <label>
                 <span>Email address</span>
                 <Error :error="errors.email" />
-                <input type="text" placeholder="e.g. stephenking@lorem.com" v-model="inputs.email"
-                    @input="validateEmail(inputs.email)">
+                <input type="text" placeholder="e.g. stephenking@lorem.com" v-model="personalInputs.email"
+                    @input="validateEmail(personalInputs.email)">
             </label>
             <label>
                 <span>Phone number</span>
                 <Error :error="errors.phone" />
-                <input type="text" placeholder="e.g. +1 234 567 890" v-model="inputs.phone"
-                    @input="validatePhone(inputs.phone)">
+                <input type="text" placeholder="e.g. +1 234 567 890" v-model="personalInputs.phone"
+                    @input="validatePhone(personalInputs.phone)">
             </label>
         </form>
         <Footer :steps="steps">
