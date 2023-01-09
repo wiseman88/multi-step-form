@@ -94,18 +94,20 @@ const prevStep = () => {
             <label>
                 <span>Name</span>
                 <Error :error="errors.name" />
-                <input type="text" placeholder="e.g. Stephen King" v-model="name" @input="validateName(name)">
+                <input type="text" placeholder="e.g. Stephen King" v-model="inputs.name"
+                    @input="validateName(inputs.name)">
             </label>
             <label>
                 <span>Email address</span>
                 <Error :error="errors.email" />
-                <input type="text" placeholder="e.g. stephenking@lorem.com" v-model="email"
-                    @input="validateEmail(email)">
+                <input type="text" placeholder="e.g. stephenking@lorem.com" v-model="inputs.email"
+                    @input="validateEmail(inputs.email)">
             </label>
             <label>
                 <span>Phone number</span>
                 <Error :error="errors.phone" />
-                <input type="text" placeholder="e.g. +1 234 567 890" v-model="phone" @input="validatePhone(phone)">
+                <input type="text" placeholder="e.g. +1 234 567 890" v-model="inputs.phone"
+                    @input="validatePhone(inputs.phone)">
             </label>
         </form>
         <Footer :steps="steps">
