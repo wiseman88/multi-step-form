@@ -7,13 +7,17 @@ import Summary from './components/Summary.vue';
 import Confirmation from './components/Confirmation.vue';
 import { useStepStore } from './stores/step';
 import { storeToRefs } from 'pinia';
-import Footer from './components/Footer.vue';
+import { onMounted, ref } from 'vue';
 
 const components = [Personal, Plans, Addons, Summary, Confirmation]
 
 const step = useStepStore()
 let { currentStep } = storeToRefs(step)
-let steps = components.length
+let steps = ref(components.length)
+
+onMounted(() => {
+  step.steps = steps.value
+})
 
 </script>
 
@@ -22,11 +26,10 @@ let steps = components.length
     <Sidebar :currentStep="currentStep" />
     <div class="form-wrapper">
       <div class="component-wrapper">
-        <component v-for="(component, index) in components" :is="component" :key="index" :id="index"
-          :currentStep="currentStep" class="component" :steps="steps"></component>
+        <component v-for="(component, index) in components" :is="component" :key="index" :id="index" class="component">
+        </component>
       </div>
     </div>
-    <!-- <Footer :steps="steps" /> -->
   </main>
 </template>
 

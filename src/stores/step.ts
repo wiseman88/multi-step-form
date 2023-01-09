@@ -4,7 +4,8 @@ import { ref } from 'vue'
 export const useStepStore = defineStore('step', {
     state: () => {
         return {
-            currentStep: ref(0)
+            currentStep: ref(0),
+            steps: ref(0)
         }
     }
 })

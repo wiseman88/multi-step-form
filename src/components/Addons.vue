@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { useStepStore } from '@/stores/step';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps<{
-    currentStep: number,
     id: number
 }>()
 
+const step = useStepStore();
+let { currentStep } = storeToRefs(step);
 </script>
 
 <template>

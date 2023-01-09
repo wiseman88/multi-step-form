@@ -9,9 +9,7 @@ import { errors, isEmail, isPhone, validateName, validateEmail, validatePhone } 
 
 
 const props = defineProps<{
-    currentStep: number,
     id: number,
-    steps: number
 }>()
 
 const inputs = reactive({
@@ -21,18 +19,18 @@ const inputs = reactive({
 })
 
 const step = useStepStore();
-let { currentStep } = storeToRefs(step);
+let { currentStep, steps } = storeToRefs(step);
 
 const allowGoBack = computed<boolean>(() => {
     return currentStep.value !== 0
 })
 
 const allowNextStep = computed<boolean>(() => {
-    return currentStep.value !== (props.steps - 2)
+    return currentStep.value !== (steps.value - 2)
 })
 
 const allowConfirm = computed<boolean>(() => {
-    return (currentStep.value + 1) === (props.steps - 1)
+    return (currentStep.value + 1) === (steps.value - 1)
 })
 
 const nextStep = () => {
