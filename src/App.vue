@@ -8,6 +8,9 @@ import Confirmation from './components/Confirmation.vue';
 import { useStepStore } from './stores/step';
 import { storeToRefs } from 'pinia';
 import { onMounted, ref } from 'vue';
+import Footer from './components/Footer.vue';
+import { nextStep, prevStep, allowGoBack, allowConfirm, allowNextStep } from '@/composables/steps';
+import Button from './components/Button.vue';
 
 const components = [Personal, Plans, Addons, Summary, Confirmation]
 
@@ -30,6 +33,12 @@ onMounted(() => {
         </component>
       </div>
     </div>
+    <Footer>
+      <Button v-if="allowGoBack" @click="prevStep" class="btn-back" :classes="['btn-default']" :text="'go back'" />
+      <Button v-if="allowNextStep" @click="nextStep" class="btn-next" :classes="['btn-primary']" :text="'next page'" />
+      <Button v-if="allowConfirm" @click="nextStep" class="btn-confirm" :classes="['btn-secondary']"
+        :text="'confirm'" />
+    </Footer>
   </main>
 </template>
 
@@ -103,5 +112,9 @@ main {
 
 .component label input::placeholder {
   color: var(--color-cool-gray);
+}
+
+.btn-next {
+  margin-left: auto;
 }
 </style>

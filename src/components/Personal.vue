@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import Error from './Error.vue';
 import Button from './Button.vue';
 import Footer from './Footer.vue';
@@ -7,7 +6,6 @@ import { useStepStore } from '@/stores/step';
 import { storeToRefs } from 'pinia';
 import { errors, validateName, validateEmail, validatePhone } from '@/composables/validations';
 import { personalInputs } from '@/composables/inputs';
-import { nextStep, prevStep, allowGoBack, allowConfirm, allowNextStep } from '@/composables/steps';
 
 
 
@@ -16,7 +14,7 @@ const props = defineProps<{
 }>()
 
 const step = useStepStore();
-let { currentStep, steps } = storeToRefs(step);
+let { currentStep } = storeToRefs(step);
 
 </script>
 
@@ -44,14 +42,6 @@ let { currentStep, steps } = storeToRefs(step);
                     @input="validatePhone(personalInputs.phone)">
             </label>
         </form>
-        <Footer :steps="steps">
-            <Button v-if="allowGoBack" @click="prevStep" class="btn-back" :classes="['btn-default']"
-                :text="'go back'" />
-            <Button v-if="allowNextStep" @click="nextStep" class="btn-next" :classes="['btn-primary']"
-                :text="'next page'" />
-            <Button v-if="allowConfirm" @click="nextStep" class="btn-confirm" :classes="['btn-secondary']"
-                :text="'confirm'" />
-        </Footer>
     </section>
 </template>
 
