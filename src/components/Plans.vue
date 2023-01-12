@@ -15,24 +15,46 @@ let { currentStep } = storeToRefs(step);
         <h1>Select your plan</h1>
         <h4>You have the option of monthly or yearly billing.</h4>
         <form action="#">
-            <div>
+            <div class="card-wrapper">
                 <label>
-                    <span>Arcade</span>
                     <input type="radio" name="card">
+                    <span class="card-input">
+                        <img src="/public/assets/images/icon-arcade.svg" alt="arcade">
+                        <span>
+                            <span class="plan-name">Arcade</span>
+                            <span class="plan-price">$9/mo</span>
+                        </span>
+                    </span>
                 </label>
                 <label>
-                    <span>Advanced</span>
                     <input type="radio" name="card">
+                    <span class="card-input">
+                        <img src="/public/assets/images/icon-advanced.svg" alt="advanced">
+                        <span>
+                            <span class="plan-name">Advanced</span>
+                            <span class="plan-price">$12/mo</span>
+                        </span>
+                    </span>
                 </label>
                 <label>
-                    <span>Pro</span>
                     <input type="radio" name="card">
+                    <span class="card-input">
+                        <img src="/public/assets/images/icon-pro.svg" alt="pro">
+                        <span>
+                            <span class="plan-name">Pro</span>
+                            <span class="plan-price">$15/mo</span>
+                        </span>
+                    </span>
                 </label>
             </div>
-            <label>
-                <input type="checkbox">
-                <span></span>
-            </label>
+            <div class="switch-wrapper">
+                <p>Monthly</p>
+                <label class="switch" for="checkbox">
+                    <input type="checkbox" id="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <p style="color: var(--color-cool-gray);">Yearly</p>
+            </div>
         </form>
     </section>
 </template>
@@ -41,6 +63,105 @@ let { currentStep } = storeToRefs(step);
 /* Radio buttons style */
 /* https://www.youtube.com/watch?v=isTbIYwMKiY&ab_channel=ALBDev */
 
+.card-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--color-light-gray);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card-input:hover {
+    border: 1px solid var(--color-border);
+}
+
+input:checked+.card-input {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-light);
+}
+
+input {
+    display: none;
+}
+
+.plan-name {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.plan-price {
+    color: var(--color-cool-gray);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
 /* Switch slider  */
 /* https://codepen.io/AllThingsSmitty/pen/MmxxOz/  */
+
+.switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    height: 3em;
+    background-color: var(--color-bg-switch);
+    border-radius: 5px;
+}
+
+.switch-wrapper p {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.switch-wrapper label {
+    margin-bottom: 0;
+}
+
+.switch {
+    display: inline-block;
+    height: 20px;
+    position: relative;
+    width: 38px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    background-color: var(--color-primary);
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+}
+
+input:checked+.slider:before {
+    transform: translateX(18px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
 </style>

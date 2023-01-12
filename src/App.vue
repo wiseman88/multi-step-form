@@ -85,14 +85,17 @@ main {
   position: relative;
 }
 
-.component label:not(:last-of-type) {
+.component label {
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-wrapper label:last-of-type {
+  margin-bottom: 1.5rem;
 }
 
 .component label span {
   display: block;
-  margin-bottom: 0.2rem;
   font-size: .8rem;
   color: var(--color-primary);
 }
