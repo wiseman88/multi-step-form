@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useStepStore } from '@/stores/step';
 import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
 
 const props = defineProps<{
     id: number
@@ -8,6 +9,12 @@ const props = defineProps<{
 
 const step = useStepStore();
 let { currentStep } = storeToRefs(step);
+
+let isChecked = ref<boolean>(false)
+
+const selectPlan = () => {
+    isChecked.value = !isChecked.value
+}
 </script>
 
 <template>
@@ -17,43 +24,58 @@ let { currentStep } = storeToRefs(step);
         <form action="#">
             <div class="card-wrapper">
                 <label>
-                    <input type="radio" name="card">
+                    <input type="radio" name="card" checked>
                     <span class="card-input">
-                        <img src="/public/assets/images/icon-arcade.svg" alt="arcade">
+                        <span class="card-image"><img src="/public/assets/images/icon-arcade.svg" alt="arcade"></span>
                         <span>
                             <span class="plan-name">Arcade</span>
-                            <span class="plan-price">$9/mo</span>
+                            <span v-if="isChecked">
+                                <span class="plan-price">$90/yr</span>
+                                <span class="plan-free">2 months free</span>
+                            </span>
+                            <span v-else class="plan-price">$9/mo</span>
                         </span>
                     </span>
                 </label>
                 <label>
                     <input type="radio" name="card">
                     <span class="card-input">
-                        <img src="/public/assets/images/icon-advanced.svg" alt="advanced">
+                        <span class="card-image"> <img src="/public/assets/images/icon-advanced.svg"
+                                alt="advanced"></span>
                         <span>
                             <span class="plan-name">Advanced</span>
-                            <span class="plan-price">$12/mo</span>
+                            <span v-if="isChecked">
+                                <span class="plan-price">$120/yr</span>
+                                <span class="plan-free">2 months free</span>
+                            </span>
+                            <span v-else class="plan-price">$12/mo</span>
                         </span>
                     </span>
                 </label>
                 <label>
                     <input type="radio" name="card">
                     <span class="card-input">
-                        <img src="/public/assets/images/icon-pro.svg" alt="pro">
+                        <span class="card-image">
+                            <img src="/public/assets/images/icon-pro.svg" alt="pro">
+                        </span>
                         <span>
                             <span class="plan-name">Pro</span>
-                            <span class="plan-price">$15/mo</span>
+                            <span v-if="isChecked">
+                                <span class="plan-price">$150/yr</span>
+                                <span class="plan-free">2 months free</span>
+                            </span>
+                            <span v-else class="plan-price">$15/mo</span>
                         </span>
                     </span>
                 </label>
             </div>
             <div class="switch-wrapper">
-                <p>Monthly</p>
+                <p :style="isChecked ? 'color: var(--color-cool-gray);' : ''">Monthly</p>
                 <label class="switch" for="checkbox">
-                    <input type="checkbox" id="checkbox">
+                    <input type="checkbox" id="checkbox" @click="selectPlan()">
                     <span class="slider round"></span>
                 </label>
-                <p style="color: var(--color-cool-gray);">Yearly</p>
+                <p :style="!isChecked ? 'color: var(--color-cool-gray);' : ''">Yearly</p>
             </div>
         </form>
     </section>
@@ -86,6 +108,10 @@ input {
     display: none;
 }
 
+.card-image {
+    align-self: baseline;
+}
+
 .plan-name {
     margin-bottom: 0.5rem;
     font-size: 1rem;
@@ -96,6 +122,10 @@ input {
     color: var(--color-cool-gray);
     font-size: 0.9rem;
     font-weight: 500;
+}
+
+.plan-free {
+    margin-top: 0.5rem;
 }
 
 /* Switch slider  */
