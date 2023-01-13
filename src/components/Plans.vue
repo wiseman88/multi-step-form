@@ -2,6 +2,7 @@
 import { useStepStore } from '@/stores/step';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import plans from '@/api/plan';
 
 const props = defineProps<{
     id: number
@@ -15,6 +16,8 @@ let isChecked = ref<boolean>(false)
 const selectPlan = () => {
     isChecked.value = !isChecked.value
 }
+
+const plansToChoose = plans
 </script>
 
 <template>
@@ -23,48 +26,17 @@ const selectPlan = () => {
         <h4>You have the option of monthly or yearly billing.</h4>
         <form action="#">
             <div class="card-wrapper">
-                <label>
+                <label v-for="(plan, index) in plansToChoose" :key="index">
                     <input type="radio" name="card" checked>
                     <span class="card-input">
-                        <span class="card-image"><img src="/public/assets/images/icon-arcade.svg" alt="arcade"></span>
+                        <span class="card-image"><img :src="plan.icon" alt="arcade"></span>
                         <span>
-                            <span class="plan-name">Arcade</span>
+                            <span class="plan-name">{{ plan.name }}</span>
                             <span v-if="isChecked">
-                                <span class="plan-price">$90/yr</span>
-                                <span class="plan-free">2 months free</span>
+                                <span class="plan-price">{{ plan.yearly }}</span>
+                                <span class="plan-free">{{ plan.free }}</span>
                             </span>
-                            <span v-else class="plan-price">$9/mo</span>
-                        </span>
-                    </span>
-                </label>
-                <label>
-                    <input type="radio" name="card">
-                    <span class="card-input">
-                        <span class="card-image"> <img src="/public/assets/images/icon-advanced.svg"
-                                alt="advanced"></span>
-                        <span>
-                            <span class="plan-name">Advanced</span>
-                            <span v-if="isChecked">
-                                <span class="plan-price">$120/yr</span>
-                                <span class="plan-free">2 months free</span>
-                            </span>
-                            <span v-else class="plan-price">$12/mo</span>
-                        </span>
-                    </span>
-                </label>
-                <label>
-                    <input type="radio" name="card">
-                    <span class="card-input">
-                        <span class="card-image">
-                            <img src="/public/assets/images/icon-pro.svg" alt="pro">
-                        </span>
-                        <span>
-                            <span class="plan-name">Pro</span>
-                            <span v-if="isChecked">
-                                <span class="plan-price">$150/yr</span>
-                                <span class="plan-free">2 months free</span>
-                            </span>
-                            <span v-else class="plan-price">$15/mo</span>
+                            <span v-else class="plan-price">{{ plan.monthly }}</span>
                         </span>
                     </span>
                 </label>
@@ -113,6 +85,7 @@ input {
 }
 
 .plan-name {
+    text-transform: capitalize;
     margin-bottom: 0.5rem;
     font-size: 1rem;
     font-weight: 500;
