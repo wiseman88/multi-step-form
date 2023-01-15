@@ -27,7 +27,7 @@ const plansToChoose = plans
         <form action="#">
             <div class="card-wrapper">
                 <label v-for="(plan, index) in plansToChoose" :key="index">
-                    <input type="radio" name="card" checked>
+                    <input type="radio" name="card" :checked="index === 0">
                     <span class="card-input">
                         <span class="card-image"><img :src="plan.icon" alt="arcade"></span>
                         <span>
